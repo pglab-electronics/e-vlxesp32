@@ -1,0 +1,153 @@
+esphome:
+  name: evlxesp32
+
+esp32:
+  board: esp32-c3-devkitm-1
+  framework:
+    type: esp-idf
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+  encryption:
+    key: "pQUjUzzg6T7NuOX4uYN6v4XvBkFcAQHzmYbr63DFmD4="
+
+ota:
+  - platform: esphome
+    password: "540900f8f8bdc6a289c72374e004a5a9"
+
+wifi:
+  ssid: "WIFI_SSID"
+  password: "WIFI_PASSWORD"
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "E-VLXSP32 Fallback Hotspot"
+    password: "D1f5r63754rn"
+
+# Enable web server
+web_server:
+
+i2c:
+  sda: GPIO3
+  scl: GPIO2
+  scan: true
+  id: bus_a
+
+sensor:
+  - platform: hdc1080
+    temperature:
+      name: "Temperature"
+      filters:
+       - offset: -2.6
+    humidity:
+      name: "Humidity"
+    address: 0x40
+    update_interval: 60s
+
+switch:
+  - platform: gpio
+    name: "Down"
+    id: velux_down
+    icon: "mdi:window-shutter"
+    pin: 
+      number: GPIO1
+    on_turn_on:
+     - delay: 200ms
+     - switch.turn_off: velux_down
+    interlock: [velux_up, velux_stop]
+    internal: true
+
+  - platform: gpio
+    name: "Stop"
+    id: velux_stop
+    icon: "mdi:window-shutter"
+    pin: 
+      number: GPIO7
+    on_turn_on:
+     - delay: 200ms
+     - switch.turn_off: velux_stop
+    interlock: [velux_down, velux_up]
+    internal: true
+
+  - platform: gpio
+    name: "Up"
+    id: velux_up
+    icon: "mdi:window-shutter"
+    pin: 
+     number: GPIO5
+    on_turn_on:
+     - delay: 200ms
+     - switch.turn_off: velux_up
+    interlock: [velux_down, velux_stop]
+    internal: true
+
+  - platform: gpio
+    pin: GPIO10
+    name: "Led Green"
+    internal: false
+
+binary_sensor:
+  - platform: gpio
+    id: sense_up
+    pin:
+      number: GPIO04
+      mode:
+        input: true
+        pullup: true
+    filters:
+      - lambda: !lambda return !(x || id(velux_up).state);
+    on_press:
+      then:
+        - cover.open: shutter
+  - platform: gpio
+    id: sense_stop
+    pin:
+      number: GPIO06
+      mode:
+        input: true
+        pullup: true
+    filters:
+      - lambda: !lambda return !(x || id(velux_stop).state);
+    on_press:
+      then:
+        - cover.stop: shutter
+    on_double_click:
+      min_length: 30ms
+      max_length: 250ms
+      then:
+        - homeassistant.event:
+            event: esphome.velux_double_click
+  - platform: gpio
+    id: sense_down
+    pin:
+      number: GPIO00
+      mode:
+        input: true
+        pullup: true
+    filters:
+      - lambda: !lambda return !(x || id(velux_down).state);
+    on_press:
+      then:
+        - cover.close: shutter
+
+cover:
+  - platform: time_based
+    id: shutter
+    name: "Shutter"
+    has_built_in_endstop: true
+    manual_control: true
+    assumed_state: true
+
+    open_action:
+      - switch.turn_on: velux_up
+    open_duration: 30s # measure this
+
+    close_action:
+      - switch.turn_on: velux_down
+    close_duration: 30s # measure this
+
+    stop_action:
+      - switch.turn_on: velux_stop

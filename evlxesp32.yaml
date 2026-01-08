@@ -1,33 +1,44 @@
+substitutions:
+  device_name: "e-vlxesp32"
+  friendly_name: "E-VLXESP32"
+  project_name: "PG_LAB_Electronics.E-VLXESP32"
+  project_version: "1.0"
+  ap_pwd: "password"
+
 esphome:
-  name: evlxesp32
+
+  name: "${device_name}"
+  name_add_mac_suffix: true
+  friendly_name: "${friendly_name}"
+  project:
+    name: "${project_name}"
+    version: "${project_version}"
 
 esp32:
   board: esp32-c3-devkitm-1
   framework:
     type: esp-idf
 
-# Enable logging
-logger:
-
-# Enable Home Assistant API
 api:
   encryption:
-    key: "pQUjUzzg6T7NuOX4uYN6v4XvBkFcAQHzmYbr63DFmD4="
+    key: !secret api_encryption_key
 
 ota:
   - platform: esphome
-    password: "540900f8f8bdc6a289c72374e004a5a9"
+    password: !secret ota_password
 
 wifi:
-  ssid: "WIFI_SSID"
-  password: "WIFI_PASSWORD"
-
-  # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "E-VLXSP32 Fallback Hotspot"
-    password: "D1f5r63754rn"
+    ssid: "${friendly_name} Hotspot"
+    password: "${ap_pwd}"
 
-# Enable web server
+logger:
+
+time:
+  - platform: homeassistant
+
+captive_portal:
+
 web_server:
 
 i2c:
@@ -151,3 +162,4 @@ cover:
 
     stop_action:
       - switch.turn_on: velux_stop
+

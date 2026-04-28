@@ -2,8 +2,7 @@ substitutions:
   device_name: "e-vlxesp32"
   friendly_name: "E-VLXESP32"
   project_name: "PG_LAB_Electronics.E-VLXESP32"
-  project_version: "1.0"
-  ap_pwd: "password"
+  project_version: "1.1"
 
 esphome:
 
@@ -30,7 +29,7 @@ ota:
 wifi:
   ap:
     ssid: "${friendly_name} Hotspot"
-    password: "${ap_pwd}"
+    password: !secret ap_pwd
 
 logger:
 

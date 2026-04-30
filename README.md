@@ -57,14 +57,47 @@ The device interfaces with supported VELUX® wall remotes using pogo pins that m
 
 Follow the standard **VELUX®** remote pairing procedure to link the remote (KLI311, KLI312, KLI313) with your window before using the **E-VLXESP32**.
 
-## Safety
-
-⚠️ Ensure power is disconnected before installing the module. Incorrect installation may damage the device or connected equipment.
-
 ## Repository Structure
 
 - `evlxesp32.yaml` – Main ESPHome configuration
 - `secrets.yaml` – Wi-Fi credentials, passwords, and keys
+
+## Hardware
+
+| Component | Description |
+|-----------|-------------|
+| MCU | ESP32-C3 (ESP32-C3-WROOM-02-N4) |
+| Ambient Sensor | HDC1080 |
+| Pogo Pins | for KLI311,KLI312, KLI313 connection |
+| Programming Port | USB-C |
+| AC-DC Module | IRM-01-5 |
+| Power Input | 220AC, 60Hz screw terminal |
+
+
+## Pinout
+
+| GPIO | Function | Direction |
+|------|----------|-----------|
+| GPIO3 | I2C SDA | Input/Output |
+| GPIO2 | I2C SCL | Output |
+| GPIO1 | POGO PIN DOWN (shutter) | Output |
+| GPIO7 | POGO PIN STOP (shutter)| Output |
+| GPIO5 | POGO PIN UP (shutter)| Output |
+| GPI10 | USER LED GREEN| Output |
+| GPIO4 | POGO PIN UP (binary sensor) | Input |
+| GPIO6 | POGO PIN STOP (binary sensor)| Input |
+| GPIO0 | POGO PIN DOWN (binary sensor)| Input |
+
+## License
+
+This project is licensed under the GNU GENERAL PUBLIC LICENSE 3.0 — see [LICENSE](LICENSE) for details.
+
+The ESPHome configuration is open source and free to modify.
+
+
+## Safety
+
+⚠️ Ensure power is disconnected before installing the module. Incorrect installation may damage the device or connected equipment.
 
 ## Disclaimer
 

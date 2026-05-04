@@ -2,7 +2,7 @@ substitutions:
   device_name: "e-vlxesp32"
   friendly_name: "E-VLXESP32"
   project_name: "PG_LAB_Electronics.E-VLXESP32"
-  project_version: "1.1"
+  project_version: "2026.1.1"
 
 esphome:
 

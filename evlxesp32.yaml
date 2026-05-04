@@ -45,7 +45,7 @@ update:
   - platform: http_request
     id: firmware_update
     name: E-VLXESP32 Firmware update
-    source: https://github.com/pglab-electronics/e-vlxesp32/blob/dev/manifest.json
+    source: https://pglab-electronics.github.io/e-vlxesp32/manifest.json
     disabled_by_default: false
     update_interval: 6h
 

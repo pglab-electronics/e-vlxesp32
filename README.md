@@ -61,6 +61,7 @@ Follow the standard **VELUX®** remote pairing procedure to link the remote (KLI
 
 - `evlxesp32.yaml` – Main ESPHome configuration
 - `secrets.yaml` – Wi-Fi credentials, passwords, and keys
+- `firmware` - Build of the last firmware
 
 ## Hardware
 

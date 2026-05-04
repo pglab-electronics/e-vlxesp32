@@ -124,12 +124,6 @@ binary_sensor:
     on_press:
       then:
         - cover.stop: shutter
-    on_double_click:
-      min_length: 30ms
-      max_length: 250ms
-      then:
-        - homeassistant.event:
-            event: esphome.velux_double_click
   - platform: gpio
     id: sense_down
     pin:

@@ -27,7 +27,36 @@ This repository contains **ESPHome YAML configuration files** used to build and 
 
 The device interfaces with supported VELUX® wall remotes using pogo pins that make contact with the remote’s internal control pads. The ESP32 exposes these controls over Wi-Fi using ESPHome, allowing integration with systems like Home Assistant.
 
+## Connect to Wi-Fi
+
+Follow one of the methods below to connect your device to Wi-Fi.
+
+### Method A — Hotspot (easiest, no app required)
+
+1. Open Wi-Fi settings on your phone or computer.
+2. Connect to the network “E-VLXESP32 Hotspot”.
+3. A captive portal page should open automatically.
+   If it doesn’t, open your browser and go to 192.168.4.1.
+4. Enter your Wi-Fi name and password.
+5. The device will connect, and the hotspot will disappear.
+
+### Method B — Bluetooth via Home Assistant app
+
+1. pen the Home Assistant mobile app (iOS or Android).
+2. Go to Settings → Devices & Services.
+3. Look for a “Discovered” banner at the top.
+   If you don’t see it, make sure Bluetooth is enabled.
+4. Tap E-VLXESP32 and follow the steps to enter your Wi-Fi credentials.
+
+### Method C — USB-C serial
+
+1. Connect the device to your computer using a USB-C cable.
+2. Open the ESPHome dashboard.
+3. Follow the prompts to provision the device via serial.
+
 ## Getting Started
+
+If you want to flash the firmware directly from your computer and configure your Wi-Fi credentials and passwords.
 
 ### Requirements
 - ESPHome installed
@@ -38,7 +67,7 @@ The device interfaces with supported VELUX® wall remotes using pogo pins that m
 
 1. Clone this repository:
    ```bash
-   git clone https://github.com/your-repo/e-vlxesp32.git
+   git clone https://github.com/pglab-electronics/e-vlxesp32.git
    
 2. Open the YAML configuration in ESPHome
 
@@ -53,9 +82,9 @@ The device interfaces with supported VELUX® wall remotes using pogo pins that m
    ```bash
    esphome run evlxesp32.yaml
 
-### Pairing
+## Pairing
 
-Follow the standard **VELUX®** remote pairing procedure to link the remote (KLI311, KLI312, KLI313) with your window before using the **E-VLXESP32**.
+Before snap-fitting the E-VLXESP32, make sure you can operate your skylight window. Follow the standard **VELUX®** remote pairing procedure to link your remote (KLI311, KLI312, or KLI313) with the window before using the E-VLXESP32.
 
 ## Repository Structure
 

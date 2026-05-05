@@ -27,7 +27,7 @@ ota:
     id: ota_http_request
 
 dashboard_import:
-  package_import_url: github://pglab-electronics/e-vlxesp32/evlxesp32.yaml@dev
+  package_import_url: github://pglab-electronics/e-vlxesp32/evlxesp32.yaml@main
   import_full_config: true
 
 wifi:

@@ -1,6 +1,10 @@
 # E-VLXESP32
 
-<img width="2550" height="1343" alt="evlxesp32_img" src="evlxesp32.png" />
+<p align="center">
+  <picture>
+   <img src="evlxesp32.png" alt=E-VLXESP32"/>
+  </picture>
+</p>
 
 **E-VLXESP32** is an ESP32-based electronics module by **PG LAB Electronics** designed to control **VELUX®** motorized skylight windows using original **VELUX®** wall remotes.
 

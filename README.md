@@ -2,7 +2,7 @@
 
 <p align="center">
   <picture>
-   <img src="evlxesp32.png" alt=E-VLXESP32"/>
+    <img width="1024" alt="E-VLXESP32" src="https://pglab-electronics.github.io/e-vlxesp32/evlxesp32.png" />
   </picture>
 </p>
 

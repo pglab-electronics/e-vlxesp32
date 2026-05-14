@@ -134,6 +134,17 @@ STANDARD VERSION
 | GPIO6 | POGO PIN STOP (binary sensor) | Input |
 | GPIO0 | POGO PIN DOWN (binary sensor) | Input |
 
+## 3D Printing Guidelines KIT
+
+For best results, print the kit version enclosure using **PETG** filament with a **0.2 mm** layer height and **30%** infill. **PETG** is recommended for its slight flexibility and durability, 
+which helps achieve a reliable snap-fit assembly and long-term mechanical stability.
+
+Supports are required for all parts to guarantee clean overhangs and a precise final geometry, ensuring the enclosure can snap-fit properly with the **VELUX®** remote cover.
+
+The model is designed with tight tolerances for a precise fit. Depending on your printer calibration, you may need to slightly scale the enclosure up or down if the fit is too tight or too loose.
+
+If the fit is too tight, avoid forcing the **VELUX®** cover onto the enclosure, as excessive pressure may damage or break the snap-fit mechanism.
+
 ## License
 
 This project is licensed under the GNU GENERAL PUBLIC LICENSE 3.0 — see [LICENSE](LICENSE) for details.

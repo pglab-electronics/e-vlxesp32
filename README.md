@@ -8,9 +8,14 @@
 
 The **E-VLXESP32** is a compact electronics module featuring an integrated **temperature and humidity sensor**.
 
-It connects to battery-powered **VELUX® wall remote controls** (models **KLI311, KLI312, KLI313**) and allows you to control **VELUX® motorized skylight windows** over your **local Wi-Fi network**.
+It connects to battery-powered **VELUX®** wall remote controls (models **KLI311, KLI312, KLI313**) and allows you to control **VELUX®** motorized skylight windows over your **local Wi-Fi network**.
 
-This repository contains **ESPHome YAML configuration files** used to build and customize E-VLXESP32 firmware.
+The E-VLXESP32 is available in two versions:
+
+- Standard Version – Designed to fit standard 501 wall boxes and powered directly from the 220V AC mains supply for permanent installation.
+- KIT Version - Powered exclusively via USB-C. This version requires user assembly and a 3D-printed enclosure using the provided design files.
+
+This repository contains the ESPHome YAML configuration files used to build and customize the E-VLXESP32 firmware.
 
 ## Features
 
@@ -91,39 +96,49 @@ Before snap-fitting the E-VLXESP32, make sure you can operate your skylight wind
 - `evlxesp32.yaml` – Main ESPHome configuration
 - `secrets.yaml` – Wi-Fi credentials, passwords, and keys
 - `firmware` - Build of the last firmware
+  - `firmware.factory.bin` - Firmware ready to flash at offset 0x0
+  - `firmware.ota.bin` - Firmware for over the air update
+  - `firmware.md5` - Firmware md5 hash
+- `stl` - 3D enclosure model
 
 ## Hardware
 
+STANDARD VERSION
+
 | Component | Description |
-|-----------|-------------|
+| ----------- | ------------- |
 | MCU | ESP32-C3 (ESP32-C3-WROOM-02-N4) |
 | Ambient Sensor | HDC1080 |
 | Pogo Pins | for KLI311,KLI312, KLI313 connection |
 | Programming Port | USB-C |
-| AC-DC Module | IRM-01-5 |
-| Power Input | 220AC, 60Hz screw terminal |
+| AC-DC Module (*) | IRM-01-5 |
+| Power Input (*) | 220AC, 60Hz screw terminal |
+| Power Input USB (**) | 5 VDC, From USB-C port |
+| Power Consumption (**) | 50 mA |
 
+(*) Only for STANDARD VERSION
+
+(**) Only for KIT VERSION
 
 ## Pinout
 
 | GPIO | Function | Direction |
-|------|----------|-----------|
+| ------ | ---------- | ----------- |
 | GPIO3 | I2C SDA | Input/Output |
 | GPIO2 | I2C SCL | Output |
 | GPIO1 | POGO PIN DOWN (shutter) | Output |
-| GPIO7 | POGO PIN STOP (shutter)| Output |
-| GPIO5 | POGO PIN UP (shutter)| Output |
-| GPI10 | USER LED GREEN| Output |
+| GPIO7 | POGO PIN STOP (shutter) | Output |
+| GPIO5 | POGO PIN UP (shutter) | Output |
+| GPI10 | USER LED GREEN | Output |
 | GPIO4 | POGO PIN UP (binary sensor) | Input |
-| GPIO6 | POGO PIN STOP (binary sensor)| Input |
-| GPIO0 | POGO PIN DOWN (binary sensor)| Input |
+| GPIO6 | POGO PIN STOP (binary sensor) | Input |
+| GPIO0 | POGO PIN DOWN (binary sensor) | Input |
 
 ## License
 
 This project is licensed under the GNU GENERAL PUBLIC LICENSE 3.0 — see [LICENSE](LICENSE) for details.
 
 The ESPHome configuration is open source and free to modify.
-
 
 ## Safety
 
@@ -136,4 +151,3 @@ The **E-VLXESP32** is an independent third-party product developed and manufactu
 Compatibility is limited to specifically listed **VELUX®** remote control models (**KLI311, KLI312, KLI313**). We do not guarantee compatibility with any other devices or future product revisions.
 This product is intended for installation by individuals with appropriate technical knowledge. Improper installation or use may result in damage to equipment or personal injury. The manufacturer assumes no liability for damages arising from incorrect installation or misuse.
 By using this product, you acknowledge and accept these terms.
-

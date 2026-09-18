@@ -2,7 +2,7 @@ substitutions:
   device_name: "e-vlxesp32"
   friendly_name: "E-VLXESP32"
   project_name: "PG_LAB_Electronics.E-VLXESP32"
-  project_version: "2026.1.2"
+  project_version: "2026.1.3"
 
 esphome:
 
@@ -12,6 +12,13 @@ esphome:
   project:
     name: "${project_name}"
     version: "${project_version}"
+
+  on_boot: 
+    - priority: 200 
+      then: 
+        - lambda: |- 
+            id(shutter).set_open_duration( static_cast<uint32_t>(id(shutter_open_time).state * 1000.0f) );
+            id(shutter).set_close_duration( static_cast<uint32_t>(id(shutter_close_time).state * 1000.0f) );   
 
 esp32:
   board: esp32-c3-devkitm-1
@@ -80,6 +87,39 @@ sensor:
     address: 0x40
     update_interval: 60s
 
+number: 
+  - platform: template 
+    id: shutter_open_time 
+    name: "Shutter Open Time" 
+    icon: "mdi:timer-outline" 
+    min_value: 5 
+    max_value: 120 
+    step: 1 
+    unit_of_measurement: "s" 
+    mode: box 
+    optimistic: true 
+    restore_value: true 
+    initial_value: 30 
+    set_action: 
+      - lambda: |- 
+          id(shutter).set_open_duration( static_cast<uint32_t>(x * 1000.0f) );
+
+  - platform: template 
+    id: shutter_close_time 
+    name: "Shutter Close Time" 
+    icon: "mdi:timer-outline" 
+    min_value: 5 
+    max_value: 120 
+    step: 1 
+    unit_of_measurement: "s" 
+    mode: box 
+    optimistic: true 
+    restore_value: true 
+    initial_value: 30 
+    set_action: 
+      - lambda: |- 
+          id(shutter).set_close_duration( static_cast<uint32_t>(x * 1000.0f) );
+    
 switch:
   - platform: gpio
     name: "Down"
@@ -171,12 +211,11 @@ cover:
 
     open_action:
       - switch.turn_on: velux_up
-    open_duration: 30s # measure this
+    open_duration: 30s
 
     close_action:
       - switch.turn_on: velux_down
-    close_duration: 30s # measure this
+    close_duration: 30s
 
     stop_action:
       - switch.turn_on: velux_stop
-

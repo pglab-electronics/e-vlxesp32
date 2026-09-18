@@ -1,14 +1,14 @@
 {
   "name": "E-VLXESP32",
-  "version": "2026.1.2",
+  "version": "2026.1.3",
   "builds": [
     {
       "chipFamily": "ESP32-C3",
       "ota": {
-        "md5": "572206f4f99aed92329b286026dc1619",
+        "md5": "ad02d69587c629891a39ead2fd9bd585",
         "path": "/e-vlxesp32/firmware/firmware.ota.bin",
         "release_url": "https://pglab-electronics.github.io/e-vlxesp32/CHANGELOG.md",
-        "summary": "E-VLXESP32 Firmware update 2026.1.2"
+        "summary": "E-VLXESP32 Firmware update 2026.1.3"
       }
     }
   ]
